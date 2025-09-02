@@ -77,7 +77,7 @@
             width: 40px;
             height: 40px;
             background: var(--primary-red);
-            border-radius: 8px;
+            border-radius: 0px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -271,7 +271,7 @@
             position: absolute;
             top: 5%;
             right: 7%;
-            z-index: 30;
+            z-index: 15;
             opacity: 1;
             transition: opacity 1s ease;
         }
@@ -556,6 +556,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 40px;
+            justify-items: center;
         }
 
         .team-card {
@@ -653,16 +654,16 @@
     <header class="nav-header">
         <div class="nav-container">
             <a href="#" class="nav-logo">
-                <div class="nav-logo-icon">11702</div>
-                <span class="nav-logo-text">Team 11702</span>
+                <img src="public/images/logo.webp" alt="Logo" class="nav-logo-icon" style="height: 40px; width: auto; object-fit: cover;">
+                <img src="public/images/title_1.webp" alt="11702 Silver Knights" class="nav-logo-text" style="height: 80px; width: auto;">
             </a>
             
             <nav class="nav-links" id="navLinks">
                 <a href="#" class="nav-link">Home</a>
                 <a href="#about" class="nav-link">About Us</a>
                 <a href="#achievements" class="nav-link">Achievements</a>
-                <a href="#" class="nav-link">Meet the Team</a>
-                <a href="#donate" class="nav-link donate">Donate</a>
+                <a href="#team" class="nav-link">Meet the Team</a>
+                <a href="mailto:Ray.tan@silverknights.ca" class="nav-link donate">Donate</a>
             </nav>
             
             <div class="nav-mobile-toggle" onclick="toggleNav()">
@@ -752,7 +753,7 @@
     </section>
     
     <!-- Meet the Team Section -->
-    <section class="content-section content-section-tight">
+    <section id="team" class="content-section content-section-tight">
         <h2 class="section-title">Meet the Team</h2>
 
         <div class="team-grid">
@@ -796,6 +797,16 @@
                 </div>
             </div>
 
+            <!-- Charlie Gao -->
+            <div class="team-card">
+                <img src="public/images/profile-pictures/charlie.webp" alt="Charlie Gao" class="team-photo">
+                <div class="team-info">
+                    <h3 class="team-name">Charlie Gao</h3>
+                    <p class="team-role">Design Lead & Driver</p>
+                    <p class="team-desc">Charlie leads robot design and drives in competition.</p>
+                </div>
+            </div>
+
             <!-- Jasmine Huang -->
             <div class="team-card">
                 <img src="public/images/profile-pictures/jasmine.webp" alt="Jasmine Huang" class="team-photo">
@@ -815,16 +826,6 @@
                     <p class="team-desc">Evan guides our match approaches and competitive strategies.</p>
                 </div>
             </div>
-
-            <!-- Charlie Gao -->
-            <div class="team-card">
-                <img src="public/images/profile-pictures/charlie.webp" alt="Charlie Gao" class="team-photo">
-                <div class="team-info">
-                    <h3 class="team-name">Charlie Gao</h3>
-                    <p class="team-role">Design Lead & Driver</p>
-                    <p class="team-desc">Charlie leads robot design and drives in competition.</p>
-                </div>
-            </div>
         </div>
     </section>
     
@@ -835,7 +836,7 @@
             <p class="donate-description">
                 Help us continue building innovative robots and inspiring the next generation of engineers. Your support makes our mission possible.
             </p>
-            <button class="donate-button">Make a Donation</button>
+            <a href="mailto:Ray.tan@silverknights.ca" class="donate-button" style="text-decoration: none; display: inline-block;">Make a Donation</a>
         </div>
     </section>
 

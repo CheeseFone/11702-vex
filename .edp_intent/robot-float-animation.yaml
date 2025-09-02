@@ -1,0 +1,48 @@
+version: "1.0.0"
+generatedBy: "edp-6-mcp"
+timestamp: "2025-09-02T00:00:00Z"
+originalIntent: "I want to make the robot have like a floating animation"
+scope:
+  allowedPaths:
+    - "C:\\Users\\Isabe\\Documents\\Coding Documents\\robotics\\vex-vscode-projects\\vex website\\index.html"
+  forbiddenPaths:
+    - "C:\\Users\\Isabe\\Documents\\Coding Documents\\robotics\\vex-vscode-projects\\vex website\\public\\images\\*"
+  newFiles: []
+apiContracts:
+  - name: "robot-float-animation"
+    type: "css-animation"
+    params:
+      - name: "duration"
+        type: "time"
+        default: "3s"
+      - name: "timing-function"
+        type: "css-timing"
+        default: "ease-in-out"
+    returns: "void"
+    required: true
+acceptanceCriteria:
+  - id: "AC-001"
+    description: "Robot image floats up and down continuously"
+    given: "Robot image is displayed in hero section"
+    when: "Page loads and animation starts"
+    then: "Robot moves up and down smoothly in a loop"
+  - id: "AC-002"
+    description: "Animation respects reduced motion preference"
+    given: "User has prefers-reduced-motion: reduce set"
+    when: "Page loads"
+    then: "Robot floating animation is disabled"
+  - id: "AC-003"
+    description: "Existing positioning and responsiveness maintained"
+    given: "Robot has existing transform positioning"
+    when: "Float animation is applied"
+    then: "Centering and responsive behavior unchanged"
+nonGoals:
+  - "Animating other elements in hero section"
+  - "Changing robot image size or positioning"
+  - "Adding new animation controls or interactions"
+  - "Modifying existing sprite animations"
+complexityBudget:
+  maxNewFunctions: 0
+  maxNewFiles: 0
+  maxLinesOfCode: 10
+  maxDependencies: 0
