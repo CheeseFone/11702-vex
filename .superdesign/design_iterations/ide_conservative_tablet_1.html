@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conservative Tablet Extension - 992px Breakpoint</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-red: #D72638;
+            --jet-black: #000000;
+            --bright-white: #FFFFFF;
+            --light-gray: #F2F2F2;
+            --text-gray: #666666;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bright-white);
+            line-height: 1.6;
+            color: var(--jet-black);
+            padding-top: 80px;
+        }
+
+        /* Navigation Styles */
+        .nav-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--bright-white);
+            border-bottom: 2px solid var(--light-gray);
+            z-index: 1000;
+            padding: 0 20px;
+            height: 80px;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--jet-black);
+        }
+
+        .nav-logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-red);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--bright-white);
+            font-weight: 900;
+            font-size: 1.2rem;
+        }
+
+        .nav-logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--jet-black);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: var(--text-gray);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.2rem;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-red);
+            background: rgba(215, 38, 56, 0.1);
+        }
+
+        .nav-link.donate {
+            background: var(--primary-red);
+            color: var(--bright-white);
+            font-weight: 600;
+            padding: 10px 20px;
+        }
+
+        .nav-link.donate:hover {
+            background: #c41e32;
+            transform: translateY(-1px);
+        }
+
+        .nav-mobile-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .nav-mobile-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--jet-black);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* CONSERVATIVE APPROACH: 992px breakpoint (Bootstrap-style) */
+        @media (max-width: 992px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--bright-white);
+                flex-direction: column;
+                padding: 20px;
+                border-bottom: 2px solid var(--light-gray);
+                gap: 16px;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-mobile-toggle {
+                display: flex;
+            }
+
+            .nav-link {
+                padding: 12px 16px;
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        /* Demo Content */
+        .demo-content {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .breakpoint-info {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 4px solid var(--primary-red);
+        }
+
+        .approach-details {
+            background: var(--bright-white);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .approach-details h2 {
+            color: var(--primary-red);
+            margin-bottom: 20px;
+        }
+
+        .approach-details ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .approach-details li {
+            padding: 8px 0;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .approach-details li:before {
+            content: "✓";
+            color: var(--primary-red);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .viewport-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--jet-black);
+            color: var(--bright-white);
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            z-index: 1001;
+        }
+    </style>
+</head>
+<body>
+    <header class="nav-header">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <div class="nav-logo-icon">11702</div>
+                <span class="nav-logo-text">Team 11702</span>
+            </a>
+            
+            <nav class="nav-links" id="navLinks">
+                <a href="#" class="nav-link">Home</a>
+                <a href="#" class="nav-link">About Us</a>
+                <a href="#" class="nav-link">Achievements</a>
+                <a href="#" class="nav-link">Meet the Team</a>
+                <a href="#" class="nav-link donate">Donate</a>
+            </nav>
+            
+            <div class="nav-mobile-toggle" onclick="toggleNav()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <div class="demo-content">
+        <div class="breakpoint-info">
+            <h3>Conservative Tablet Extension (992px)</h3>
+            <p><strong>Pattern:</strong> Bootstrap-inspired approach extending hamburger menu to tablets</p>
+            <p><strong>Breakpoint:</strong> ≤992px shows hamburger (includes most tablets)</p>
+        </div>
+
+        <div class="approach-details">
+            <h2>Option 1: Conservative Approach</h2>
+            <ul>
+                <li>Follows Bootstrap 5 convention (992px lg breakpoint)</li>
+                <li>Maintains desktop experience for large tablets (1024px+)</li>
+                <li>Industry-standard responsive pattern</li>
+                <li>Minimal risk, widely understood behavior</li>
+                <li>iPad Portrait (768px) and most tablets covered</li>
+                <li>Large iPad Pro landscape (1366px) remains desktop</li>
+                <li>Covers tablets: 768px-992px</li>
+            </ul>
+            
+            <h3 style="margin-top: 30px; color: var(--text-gray);">Device Coverage:</h3>
+            <div style="margin-top: 15px;">
+                <strong>Desktop (>992px):</strong> Full navigation visible<br>
+                <strong>Tablet (769px-992px):</strong> Hamburger menu<br>
+                <strong>Mobile (≤768px):</strong> Hamburger menu
+            </div>
+        </div>
+    </div>
+
+    <div class="viewport-indicator" id="viewportIndicator">
+        Loading...
+    </div>
+
+    <script>
+        function toggleNav() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Viewport indicator
+        function updateViewportIndicator() {
+            const indicator = document.getElementById('viewportIndicator');
+            const width = window.innerWidth;
+            
+            if (width <= 768) {
+                indicator.textContent = `Mobile (${width}px)`;
+                indicator.style.background = '#D72638';
+            } else if (width <= 992) {
+                indicator.textContent = `Tablet (${width}px)`;
+                indicator.style.background = '#FF8C00';
+            } else {
+                indicator.textContent = `Desktop (${width}px)`;
+                indicator.style.background = '#008000';
+            }
+        }
+
+        window.addEventListener('resize', updateViewportIndicator);
+        updateViewportIndicator();
+    </script>
+</body>
+</html>

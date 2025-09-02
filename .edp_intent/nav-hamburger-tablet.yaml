@@ -1,0 +1,52 @@
+version: "1.0.0"
+generatedBy: "edp-6-mcp"
+timestamp: "2025-09-02T00:00:00Z"
+originalIntent: "make it so that the nav bar becomes hamburger even when tablet mode"
+scope:
+  allowedPaths:
+    - "index.html"
+  forbiddenPaths:
+    - "public/"
+    - ".superdesign/"
+    - "docs/"
+  newFiles: []
+apiContracts:
+  - name: "responsive-navigation"
+    type: "css-media-query"
+    params:
+      - name: "breakpoint"
+        type: "pixel-value"
+    returns: "void"
+    required: true
+acceptanceCriteria:
+  - id: "AC-001"
+    description: "Hamburger menu shows on tablet devices"
+    given: "User views website on tablet device (769px-992px width)"
+    when: "Page loads or browser is resized to tablet viewport"
+    then: "Navigation shows hamburger button and hides navigation links"
+  - id: "AC-002"
+    description: "Existing mobile behavior preserved"
+    given: "User views website on mobile device (≤768px width)"
+    when: "Page loads or browser is resized to mobile viewport"
+    then: "Navigation shows hamburger button and hides navigation links (unchanged)"
+  - id: "AC-003"
+    description: "Desktop experience maintained for large screens"
+    given: "User views website on desktop device (>992px width)"
+    when: "Page loads or browser is resized to desktop viewport"
+    then: "Navigation shows full horizontal navigation links and hides hamburger"
+  - id: "AC-004"
+    description: "Toggle functionality works on tablets"
+    given: "Hamburger menu is visible on tablet device"
+    when: "User clicks hamburger toggle button"
+    then: "Mobile navigation menu opens/closes properly"
+nonGoals:
+  - "Changing navigation HTML structure"
+  - "Modifying JavaScript toggle functionality"  
+  - "Adding new navigation features or styling"
+  - "Optimizing performance or animations"
+  - "Supporting additional device categories"
+complexityBudget:
+  maxNewFunctions: 0
+  maxNewFiles: 0
+  maxLinesOfCode: 10
+  maxDependencies: 0

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Option 1: Fluid Clamp Scaling</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --primary-red: #D72638;
+            --jet-black: #000000;
+            --bright-white: #FFFFFF;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background: var(--bright-white);
+            color: var(--jet-black);
+        }
+        
+        .hero-section {
+            background: var(--bright-white);
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .robot-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .parallax-layer {
+            position: absolute;
+            top: 62.5%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            will-change: transform;
+        }
+        
+        /* OPTION 1: FLUID CLAMP SCALING */
+        .title-image {
+            z-index: 20;
+            width: clamp(300px, 85vw, 1200px);
+            top: 22.5%;
+        }
+        
+        .robot-image {
+            z-index: 5;
+            max-width: 70%;
+            opacity: 1;
+        }
+        
+        /* Animated Icons - Fluid Scaling */
+        .corn-container {
+            position: absolute;
+            top: 5%;
+            right: 7%;
+            z-index: 30;
+        }
+        
+        .corn-image {
+            width: clamp(150px, 25vw, 600px); /* Scaled from 1200px */
+            image-rendering: pixelated;
+        }
+        
+        .lightbulb-container {
+            position: absolute;
+            top: 5%;
+            left: 3%;
+            z-index: 15;
+        }
+        
+        .lightbulb-image {
+            width: clamp(125px, 20vw, 500px); /* Scaled from 1000px */
+            image-rendering: pixelated;
+        }
+        
+        .exclamation-container {
+            position: absolute;
+            top: 30.625%;
+            right: 10%;
+            z-index: 25;
+        }
+        
+        .exclamation-image {
+            width: clamp(125px, 20vw, 500px); /* Scaled from 1000px */
+            image-rendering: pixelated;
+        }
+        
+        .smiley-container {
+            position: absolute;
+            top: 22.5%;
+            right: 7%;
+            z-index: 15;
+        }
+        
+        .smiley-image {
+            width: clamp(150px, 25vw, 600px); /* Scaled from 1200px */
+            image-rendering: pixelated;
+        }
+        
+        /* Demo placeholder images */
+        .demo-icon {
+            background: linear-gradient(45deg, var(--primary-red), #ff6b7a);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            aspect-ratio: 1;
+            font-size: clamp(1rem, 4vw, 2rem);
+        }
+        
+        .info-panel {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 14px;
+            z-index: 100;
+            max-width: 300px;
+        }
+        
+        .resize-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary-red);
+            color: white;
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="info-panel">
+        <h3>Option 1: Fluid Clamp Scaling</h3>
+        <p><strong>Pattern:</strong> CSS clamp() for smooth scaling</p>
+        <p><strong>Icons scale:</strong> 150px → 25vw → 600px</p>
+        <p><strong>Benefits:</strong> Smooth, performant, modern</p>
+        <p><strong>Resize browser to test responsiveness</strong></p>
+    </div>
+    
+    <div class="resize-indicator" id="sizeIndicator">
+        Screen: <span id="screenSize"></span>
+    </div>
+    
+    <section class="hero-section">
+        <div class="robot-container">
+            <!-- Title -->
+            <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 100'><rect width='100%' height='100%' fill='%23D72638'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='white' font-size='24' font-weight='bold'>TITLE</text></svg>" alt="Title" class="parallax-layer title-image">
+            
+            <!-- Robot -->
+            <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 400'><rect width='100%' height='100%' fill='%23666'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='white' font-size='20' font-weight='bold'>ROBOT</text></svg>" alt="Robot" class="parallax-layer robot-image">
+            
+            <!-- Animated Icons with Fluid Clamp -->
+            <div class="corn-container">
+                <div class="corn-image demo-icon">🌽</div>
+            </div>
+            
+            <div class="lightbulb-container">
+                <div class="lightbulb-image demo-icon">💡</div>
+            </div>
+            
+            <div class="exclamation-container">
+                <div class="exclamation-image demo-icon">❗</div>
+            </div>
+            
+            <div class="smiley-container">
+                <div class="smiley-image demo-icon">😊</div>
+            </div>
+        </div>
+    </section>
+    
+    <script>
+        function updateScreenSize() {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            document.getElementById('screenSize').textContent = `${width}x${height}px`;
+        }
+        
+        window.addEventListener('resize', updateScreenSize);
+        updateScreenSize();
+    </script>
+</body>
+</html>
