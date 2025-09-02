@@ -6,7 +6,9 @@
       "mcp__ct-devmcp__do_bld",
       "mcp__ct-devmcp__do_ide",
       "mcp__ct-devmcp__do_pla",
-      "Bash(python:*)"
+      "Bash(python:*)",
+      "Bash(gh repo edit:*)",
+      "Bash(start https://github.com/Abluebowobble/vex-website/settings)"
     ],
     "deny": [],
     "ask": []

@@ -1,0 +1,56 @@
+version: "1.0.0"
+generatedBy: "edp-6-mcp"
+timestamp: "2025-09-02T00:00:00Z"
+originalIntent: "the hero section is not responsive on tablets and phones, especially the animated icons like corn, lightbulb, exclaimation, smiley"
+scope:
+  allowedPaths:
+    - "index.html"
+  forbiddenPaths:
+    - "public/**"
+    - "docs/**"
+    - ".superdesign/**"
+  newFiles: []
+apiContracts: []
+acceptanceCriteria:
+  - id: "AC-001"
+    description: "Corn icon displays without horizontal overflow on tablets (768px-1024px)"
+    given: "User views hero section on tablet device"
+    when: "Screen width is between 768px and 1024px"
+    then: "Corn icon scales appropriately and stays within viewport bounds"
+  - id: "AC-002"
+    description: "Corn icon displays without horizontal overflow on phones (<768px)"
+    given: "User views hero section on mobile device"
+    when: "Screen width is less than 768px"
+    then: "Corn icon scales appropriately and stays within viewport bounds"
+  - id: "AC-003"
+    description: "Lightbulb icon displays without horizontal overflow on tablets and phones"
+    given: "User views hero section on tablet or mobile device"
+    when: "Screen width is less than 1024px"
+    then: "Lightbulb icon scales appropriately without causing layout issues"
+  - id: "AC-004"
+    description: "Exclamation icon displays without horizontal overflow on tablets and phones"
+    given: "User views hero section on tablet or mobile device"
+    when: "Screen width is less than 1024px"
+    then: "Exclamation icon scales appropriately without causing layout issues"
+  - id: "AC-005"
+    description: "Smiley icon displays without horizontal overflow on tablets and phones"
+    given: "User views hero section on tablet or mobile device"
+    when: "Screen width is less than 1024px"
+    then: "Smiley icon scales appropriately without causing layout issues"
+  - id: "AC-006"
+    description: "Desktop appearance and animations remain unchanged"
+    given: "User views hero section on desktop (>1024px)"
+    when: "All responsive changes are applied"
+    then: "Icons maintain original size and animation behavior"
+nonGoals:
+  - "Modifying navigation responsiveness"
+  - "Changing content section responsive behavior"
+  - "Altering sprite animation timing or behavior"
+  - "Improving page load performance"
+  - "Adding new animated elements"
+  - "Modifying typography or color schemes"
+complexityBudget:
+  maxNewFunctions: 0
+  maxNewFiles: 0
+  maxLinesOfCode: 20
+  maxDependencies: 0
