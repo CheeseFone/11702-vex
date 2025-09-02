@@ -173,7 +173,7 @@
         
         .title-image {
             z-index: 20;
-            width: clamp(800px, 85vw, 1200px);
+            width: clamp(1200px, 95vw, 1600px);
             top: 22.5%;
         }
         
@@ -250,7 +250,7 @@
         
         .star-container {
             position: absolute;
-            top: 75%;
+            top: 65%;
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 3;
@@ -263,7 +263,7 @@
         }
         
         .star-image {
-            width: 800px;
+            width: clamp(500px, 85vw, 900px);
             height: auto;
         }
         
@@ -646,6 +646,34 @@
                 width: 100%;
                 text-align: center;
             }
+            
+            .title-image {
+                width: clamp(300px, 95vw, 1000px);
+            }
+            
+            .star-image {
+                width: clamp(250px, 90vw, 800px);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .title-image {
+                width: clamp(250px, 98vw, 800px);
+            }
+            
+            .star-image {
+                width: clamp(200px, 95vw, 700px);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .title-image {
+                width: clamp(200px, 99vw, 600px);
+            }
+            
+            .star-image {
+                width: clamp(150px, 98vw, 500px);
+            }
         }
     </style>
 </head>
@@ -677,42 +705,13 @@
     <!-- Hero Section -->
     <section class="hero-section">
         <!-- Title Layer (Foreground, moves slower) - Outside container for full width -->
-        <img src="public/images/title_1.webp" alt="Team Title" class="parallax-layer title-image" id="titleImage">
-        
-        <!-- Corn Animation - Outside container like title -->
-        <div class="corn-container" id="cornContainer">
-            <img src="public/images/corn_1.webp" alt="Corn" class="corn-image" id="cornImage">
-        </div>
+        <img src="public/images/animation2/1.webp" alt="Team Title" class="parallax-layer title-image" id="titleImage">
         
         <div class="robot-container">
-            <!-- Star Background (appears at dead stop) -->
+            <!-- Star Background Animation -->
             <div class="star-container" id="starContainer">
-                <img src="public/images/star_1.webp" alt="Star" class="star-image" id="starImage">
+                <img src="public/images/animation2/b1.webp" alt="Star" class="star-image" id="starImage">
             </div>
-            
-            <!-- Robot Layer (Background, moves faster) -->
-            <img src="public/images/robot.webp" alt="Robot" class="parallax-layer robot-image" id="robotImage">
-            
-            <!-- Exclamation Animation -->
-            <div class="exclamation-container" id="exclamationContainer">
-                <img src="public/images/exclaimation_1.webp" alt="Exclamation" class="exclamation-image" id="exclamationImage">
-            </div>
-            
-            <!-- Speech Bubble -->
-            <div class="speech-bubble-container" id="speechBubbleContainer">
-                <img src="public/images/speech_bubble.webp" alt="Speech Bubble" class="speech-bubble-image" id="speechBubbleImage">
-            </div>
-            
-            <!-- Smiley Animation -->
-            <div class="smiley-container" id="smileyContainer">
-                <img src="public/images/smiley_1.webp" alt="Smiley" class="smiley-image" id="smileyImage">
-            </div>
-            
-        </div>
-        
-        <!-- Lightbulb Animation - Outside container with title and heartface -->
-        <div class="lightbulb-container" id="lightbulbContainer">
-            <img src="public/images/lightbulb_1.webp" alt="Lightbulb" class="lightbulb-image" id="lightbulbImage">
         </div>
     </section>
     
@@ -850,25 +849,11 @@
         class HeroBanner {
             constructor() {
                 this.titleImage = document.getElementById('titleImage');
-                this.robotImage = document.getElementById('robotImage');
                 this.starContainer = document.getElementById('starContainer');
-                this.exclamationContainer = document.getElementById('exclamationContainer');
-                this.speechBubbleContainer = document.getElementById('speechBubbleContainer');
-                this.smileyContainer = document.getElementById('smileyContainer');
-                this.cornContainer = document.getElementById('cornContainer');
-                this.lightbulbContainer = document.getElementById('lightbulbContainer');
-                this.exclamationImage = document.getElementById('exclamationImage');
-                this.smileyImage = document.getElementById('smileyImage');
-                this.cornImage = document.getElementById('cornImage');
-                this.lightbulbImage = document.getElementById('lightbulbImage');
                 this.starImage = document.getElementById('starImage');
                 
                 this.animationInterval = null;
-                this.exclamationFrame = 1;
-                this.smileyFrame = 1;
                 this.titleFrame = 1;
-                this.cornFrame = 1;
-                this.lightbulbFrame = 1;
                 this.starFrame = 1;
                 
                 this.reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -877,7 +862,6 @@
             }
             
             init() {
-                // Set all elements to visible immediately
                 this.showAllElements();
                 if (!this.reducedMotion) {
                     this.startSpriteAnimations();
@@ -885,13 +869,7 @@
             }
             
             showAllElements() {
-                this.robotImage.classList.add('visible');
                 this.starContainer.classList.add('visible');
-                this.exclamationContainer.classList.add('visible');
-                this.speechBubbleContainer.classList.add('visible');
-                this.smileyContainer.classList.add('visible');
-                this.cornContainer.classList.add('visible');
-                this.lightbulbContainer.classList.add('visible');
             }
             
             
@@ -901,28 +879,12 @@
                 this.animationInterval = setInterval(() => {
                     // Cycle title frames (1 -> 2 -> 3 -> 4 -> 1)
                     this.titleFrame = this.titleFrame === 4 ? 1 : this.titleFrame + 1;
-                    this.titleImage.src = `public/images/title_${this.titleFrame}.webp`;
-                    
-                    // Swap exclamation frames
-                    this.exclamationFrame = this.exclamationFrame === 1 ? 2 : 1;
-                    this.exclamationImage.src = `public/images/exclaimation_${this.exclamationFrame}.webp`;
-                    
-                    // Swap smiley frames
-                    this.smileyFrame = this.smileyFrame === 1 ? 2 : 1;
-                    this.smileyImage.src = `public/images/smiley_${this.smileyFrame}.webp`;
-                    
-                    // Swap corn frames
-                    this.cornFrame = this.cornFrame === 1 ? 2 : 1;
-                    this.cornImage.src = `public/images/corn_${this.cornFrame}.webp`;
-                    
-                    // Swap lightbulb frames
-                    this.lightbulbFrame = this.lightbulbFrame === 1 ? 2 : 1;
-                    this.lightbulbImage.src = `public/images/lightbulb_${this.lightbulbFrame}.webp`;
+                    this.titleImage.src = `public/images/animation2/${this.titleFrame}.webp`;
                     
                     // Cycle star frames (1 -> 2 -> 3 -> 4 -> 5 -> 1)
                     this.starFrame = this.starFrame === 5 ? 1 : this.starFrame + 1;
-                    this.starImage.src = `public/images/star_${this.starFrame}.webp`;
-                }, 1000); // 1 fps (1000ms)
+                    this.starImage.src = `public/images/animation2/b${this.starFrame}.webp`;
+                }, 1000);
             }
         }
         
