@@ -1,0 +1,85 @@
+version: "1.0.0"
+generatedBy: "edp-6-mcp"
+timestamp: "2025-09-02T00:00:00Z"
+originalIntent: "I want all title text to be in etna sans serif"
+scope:
+  allowedPaths:
+    - "C:\\Users\\Isabe\\Documents\\Coding Documents\\robotics\\vex-vscode-projects\\vex website\\index.html"
+  forbiddenPaths:
+    - "C:\\Users\\Isabe\\Documents\\Coding Documents\\robotics\\vex-vscode-projects\\vex website\\public\\*"
+  newFiles: []
+apiContracts:
+  - name: "nav-logo-text"
+    type: "css-class"
+    params:
+      - name: "font-family"
+        type: "string"
+    returns: "void"
+    required: true
+  - name: "section-title"
+    type: "css-class"  
+    params:
+      - name: "font-family"
+        type: "string"
+    returns: "void"
+    required: true
+  - name: "donate-title"
+    type: "css-class"
+    params:
+      - name: "font-family" 
+        type: "string"
+    returns: "void"
+    required: true
+  - name: "value-name"
+    type: "css-class"
+    params:
+      - name: "font-family"
+        type: "string"  
+    returns: "void"
+    required: true
+  - name: "team-name"
+    type: "css-class"
+    params:
+      - name: "font-family"
+        type: "string"
+    returns: "void"
+    required: true
+acceptanceCriteria:
+  - id: "AC-001"
+    description: "Navigation logo text displays in Etna Sans Serif"
+    given: "Page loads with nav-logo-text element"
+    when: "Font renders on screen"
+    then: "Text displays in Etna Sans Serif font family"
+  - id: "AC-002" 
+    description: "Section titles display in Etna Sans Serif"
+    given: "Page loads with section-title elements"
+    when: "Font renders on screen"
+    then: "Text displays in Etna Sans Serif font family"
+  - id: "AC-003"
+    description: "Donate title displays in Etna Sans Serif" 
+    given: "Page loads with donate-title element"
+    when: "Font renders on screen"
+    then: "Text displays in Etna Sans Serif font family"
+  - id: "AC-004"
+    description: "Value names display in Etna Sans Serif"
+    given: "Page loads with value-name elements"
+    when: "Font renders on screen" 
+    then: "Text displays in Etna Sans Serif font family"
+  - id: "AC-005"
+    description: "Team name displays in Etna Sans Serif"
+    given: "Page loads with team-name element (when added)"
+    when: "Font renders on screen"
+    then: "Text displays in Etna Sans Serif font family"
+nonGoals:
+  - "Font weight modifications"
+  - "Font size adjustments" 
+  - "Color changes"
+  - "Typography system creation"
+  - "Performance optimization beyond basic font loading"
+  - "Responsive font scaling changes"
+  - "CSS architecture refactoring"
+complexityBudget:
+  maxNewFunctions: 0
+  maxNewFiles: 0
+  maxLinesOfCode: 5
+  maxDependencies: 1

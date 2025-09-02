@@ -1,0 +1,45 @@
+version: "1.0.0"
+generatedBy: "edp-6-mcp"
+timestamp: "2025-01-09T12:00:00Z"
+originalIntent: "i just want the original image in the hero banner to be bigger - do option 3"
+scope:
+  allowedPaths:
+    - "index.html"
+  forbiddenPaths:
+    - "public/images/*"
+    - ".superdesign/*"
+  newFiles: []
+apiContracts:
+  - name: "title-image CSS class"
+    type: "css-rule"
+    params:
+      - name: "width"
+        type: "clamp(600px, 75vw, 900px)"
+    returns: "void"
+    required: true
+acceptanceCriteria:
+  - id: "AC-001"
+    description: "Title image displays larger than current size"
+    given: "User loads the hero banner"
+    when: "Page renders on desktop"
+    then: "Title image width is between 600px and 900px based on viewport"
+  - id: "AC-002"
+    description: "Title image maintains responsive behavior"
+    given: "User resizes browser window"
+    when: "Viewport changes from mobile to desktop"
+    then: "Title scales smoothly with minimum 600px, maximum 900px"
+  - id: "AC-003"
+    description: "Parallax functionality remains intact"
+    given: "User scrolls the page"
+    when: "Scroll events trigger"
+    then: "Title image moves with parallax effect as before"
+nonGoals:
+  - "Changing container sizes or positioning"
+  - "Modifying robot image or other parallax layers"
+  - "Adding new responsive breakpoints"
+  - "Changing parallax behavior or JavaScript"
+complexityBudget:
+  maxNewFunctions: 0
+  maxNewFiles: 0
+  maxLinesOfCode: 1
+  maxDependencies: 0

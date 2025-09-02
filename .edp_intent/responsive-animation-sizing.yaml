@@ -1,0 +1,61 @@
+version: "1.0.0"
+generatedBy: "edp-6-mcp"
+timestamp: "2025-09-02T14:30:00Z"
+originalIntent: "make them 5 times bigger (referring to heartface and lightbulb animations that were not appearing bigger despite CSS changes)"
+scope:
+  allowedPaths:
+    - "index.html"
+  forbiddenPaths:
+    - "public/images/*"
+    - "docs/*"
+    - ".superdesign/*"
+  newFiles: []
+apiContracts:
+  - name: "heartface-image"
+    type: "css-class"
+    params:
+      - name: "width"
+        type: "css-clamp"
+        value: "clamp(500px, 15vw, 1000px)"
+    returns: "void"
+    required: true
+  - name: "lightbulb-image"
+    type: "css-class"
+    params:
+      - name: "width"
+        type: "css-clamp"
+        value: "clamp(375px, 12vw, 750px)"
+    returns: "void"
+    required: true
+acceptanceCriteria:
+  - id: "AC-001"
+    description: "Heartface animation appears significantly larger"
+    given: "Page loads with heartface animation"
+    when: "User views the page on desktop"
+    then: "Heartface is visibly much larger than original 200px size"
+  - id: "AC-002"
+    description: "Lightbulb animation appears significantly larger"
+    given: "Page loads with lightbulb animation"
+    when: "User views the page on desktop"
+    then: "Lightbulb is visibly much larger than original 150px size"
+  - id: "AC-003"
+    description: "Animations scale responsively"
+    given: "Page loads with both animations"
+    when: "User resizes viewport or views on different devices"
+    then: "Both animations scale appropriately without breaking layout"
+  - id: "AC-004"
+    description: "Animations remain within container bounds"
+    given: "Large animations are displayed"
+    when: "Viewing on all screen sizes"
+    then: "No overflow or layout breaking occurs"
+nonGoals:
+  - "Modifying HTML structure or element positioning"
+  - "Changing container constraints or overflow settings"
+  - "Adding new animation features or behaviors"
+  - "Modifying existing animation timing or synchronization"
+  - "Creating new image assets or file modifications"
+complexityBudget:
+  maxNewFunctions: 0
+  maxNewFiles: 0
+  maxLinesOfCode: 30
+  maxDependencies: 0

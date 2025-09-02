@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Option 2: Breakpoint-Specific Sizing Strategy</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .hero-section {
+            background: #ffffff;
+            height: 200vh;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .robot-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .parallax-layer {
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            will-change: transform;
+        }
+        
+        /* OPTION 2: Breakpoint-Specific Sizing Implementation */
+        .title-image {
+            z-index: 10;
+            height: auto;
+            top: 20%;
+            /* Desktop default */
+            width: 75%;
+            max-width: 800px;
+        }
+        
+        .robot-image {
+            z-index: 5;
+            max-width: 70%;
+            height: auto;
+        }
+        
+        /* Demonstration placeholder */
+        .title-placeholder {
+            background: linear-gradient(45deg, #D72638, #ff4757);
+            color: white;
+            padding: 35px 50px;
+            border-radius: 15px;
+            font-size: 3.5rem;
+            font-weight: 900;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(215, 38, 56, 0.3);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .info-panel {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.9);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 14px;
+            z-index: 100;
+            max-width: 300px;
+        }
+
+        .info-panel h3 {
+            color: #D72638;
+            margin-bottom: 10px;
+        }
+
+        .info-panel ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .info-panel li {
+            margin: 5px 0;
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .info-panel li:before {
+            content: "✓";
+            color: #4CAF50;
+            position: absolute;
+            left: 0;
+        }
+
+        .breakpoint-indicator {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(215, 38, 56, 0.9);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        /* Tablet breakpoint - following existing pattern */
+        @media (max-width: 768px) {
+            .title-image {
+                width: 85%;
+                max-width: 600px;
+                top: 18%;
+            }
+            
+            .title-placeholder {
+                font-size: 2.8rem;
+                padding: 30px 40px;
+            }
+            
+            .info-panel {
+                position: relative;
+                margin: 20px;
+            }
+        }
+
+        /* Mobile breakpoint */
+        @media (max-width: 480px) {
+            .title-image {
+                width: 95%;
+                max-width: 400px;
+                top: 15%;
+            }
+            
+            .title-placeholder {
+                font-size: 2rem;
+                padding: 25px 30px;
+            }
+        }
+
+        /* Large mobile breakpoint */
+        @media (max-width: 375px) {
+            .title-image {
+                width: 98%;
+                max-width: 320px;
+                top: 12%;
+            }
+            
+            .title-placeholder {
+                font-size: 1.6rem;
+                padding: 20px 25px;
+            }
+        }
+
+        /* Extra large screens */
+        @media (min-width: 1200px) {
+            .title-image {
+                width: 70%;
+                max-width: 900px;
+            }
+            
+            .title-placeholder {
+                font-size: 4rem;
+                padding: 40px 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="info-panel">
+        <h3>Option 2: Breakpoint Strategy</h3>
+        <ul>
+            <li>Discrete size jumps at breakpoints</li>
+            <li>Follows existing 768px pattern</li>
+            <li>Predictable behavior per device</li>
+            <li>Easy to maintain and extend</li>
+            <li>Clear visual hierarchy</li>
+        </ul>
+        <p><strong>Resize window to see breakpoint changes</strong></p>
+    </div>
+
+    <div class="breakpoint-indicator">
+        Desktop (>768px)
+    </div>
+
+    <section class="hero-section">
+        <div class="robot-container">
+            <div class="parallax-layer title-image">
+                <div class="title-placeholder">1702E SILVER KNIGHTS</div>
+            </div>
+            
+            <div class="parallax-layer robot-image">
+                <div style="width: 400px; height: 300px; background: #f0f0f0; border: 3px dashed #ccc; display: flex; align-items: center; justify-content: center; border-radius: 10px;">
+                    <span style="color: #666; font-size: 18px;">Robot Image Placeholder</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Update breakpoint indicator
+        function updateBreakpointIndicator() {
+            const indicator = document.querySelector('.breakpoint-indicator');
+            const width = window.innerWidth;
+            
+            if (width <= 375) {
+                indicator.textContent = 'Extra Small Mobile (≤375px)';
+            } else if (width <= 480) {
+                indicator.textContent = 'Small Mobile (≤480px)';
+            } else if (width <= 768) {
+                indicator.textContent = 'Mobile (≤768px)';
+            } else if (width <= 1200) {
+                indicator.textContent = 'Desktop (≤1200px)';
+            } else {
+                indicator.textContent = 'Large Desktop (>1200px)';
+            }
+        }
+        
+        updateBreakpointIndicator();
+        window.addEventListener('resize', updateBreakpointIndicator);
+    </script>
+</body>
+</html>

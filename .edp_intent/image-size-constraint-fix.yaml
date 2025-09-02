@@ -1,0 +1,38 @@
+version: "1.0.0"
+generatedBy: "edp-6-mcp"
+timestamp: "2025-01-16T20:30:00Z"
+originalIntent: "can you size both the exclaimation and the smiley times 1.5 - nothing changed when sizing didn't take effect due to container constraints"
+scope:
+  allowedPaths:
+    - "C:\\Users\\Isabe\\Documents\\Coding Documents\\robotics\\vex-vscode-projects\\vex website\\index.html"
+  forbiddenPaths:
+    - "C:\\Users\\Isabe\\Documents\\Coding Documents\\robotics\\vex-vscode-projects\\vex website\\public\\images\\*"
+  newFiles: []
+apiContracts: []
+acceptanceCriteria:
+  - id: "AC-001"
+    description: "Exclamation image displays at 1800px max-width (1.5x increase from 1200px effective size)"
+    given: "User scrolls to trigger exclamation animation"
+    when: "Exclamation image is rendered"
+    then: "Image displays visibly larger than before (1.5x scale)"
+  - id: "AC-002"
+    description: "Smiley image displays at 1800px max-width (1.5x increase from 1200px effective size)"
+    given: "User scrolls to trigger smiley animation" 
+    when: "Smiley image is rendered"
+    then: "Image displays visibly larger than before (1.5x scale)"
+  - id: "AC-003"
+    description: "Both images maintain existing positioning and animation behavior"
+    given: "Container constraint is resolved"
+    when: "Images are displayed at new size"
+    then: "Positioning, parallax, and sprite animations work unchanged"
+nonGoals:
+  - "Responsive design improvements beyond fixing container constraint"
+  - "Animation timing or behavior modifications"
+  - "Mobile optimization enhancements"
+  - "Performance optimizations"
+  - "Additional styling or visual enhancements"
+complexityBudget:
+  maxNewFunctions: 0
+  maxNewFiles: 0
+  maxLinesOfCode: 10
+  maxDependencies: 0

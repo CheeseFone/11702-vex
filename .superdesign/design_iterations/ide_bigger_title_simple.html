@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Title Size Increase Options</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .comparison-section {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 2px solid #eee;
+            overflow: hidden;
+        }
+
+        .section-label {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(215, 38, 56, 0.9);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            z-index: 100;
+        }
+
+        .robot-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .parallax-layer {
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            will-change: transform;
+        }
+        
+        /* CURRENT SIZE (for comparison) */
+        .current-size .title-image {
+            z-index: 10;
+            max-width: 100vw;
+            top: 20%;
+        }
+
+        /* OPTION 1: Simple width increase */
+        .bigger-width .title-image {
+            z-index: 10;
+            width: 120vw; /* 20% bigger than viewport */
+            max-width: none;
+            top: 20%;
+        }
+
+        /* OPTION 2: Percentage-based increase */
+        .percentage-bigger .title-image {
+            z-index: 10;
+            width: 85vw; /* Specific larger size */
+            max-width: 1000px;
+            top: 20%;
+        }
+
+        /* OPTION 3: Fixed pixel increase */
+        .fixed-bigger .title-image {
+            z-index: 10;
+            width: clamp(600px, 75vw, 900px); /* Larger minimum and maximum */
+            top: 20%;
+        }
+
+        .robot-image {
+            z-index: 5;
+            max-width: 70%;
+        }
+        
+        /* Title placeholder styling */
+        .title-placeholder {
+            background: linear-gradient(45deg, #D72638, #ff4757);
+            color: white;
+            padding: 25px 40px;
+            border-radius: 15px;
+            font-weight: 900;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(215, 38, 56, 0.3);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: clamp(1.8rem, 4vw, 3.5rem);
+            white-space: nowrap;
+        }
+
+        .size-info {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .size-info h4 {
+            color: #4CAF50;
+            margin-bottom: 8px;
+        }
+
+        /* Demo robot placeholder */
+        .robot-placeholder {
+            width: 300px;
+            height: 200px;
+            background: #f0f0f0;
+            border: 3px dashed #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .bigger-width .title-image {
+                width: 95vw; /* Scale back on mobile */
+            }
+            
+            .percentage-bigger .title-image {
+                width: 90vw;
+                max-width: 500px;
+            }
+            
+            .fixed-bigger .title-image {
+                width: clamp(300px, 85vw, 600px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Current Size (Reference) -->
+    <section class="comparison-section current-size">
+        <div class="section-label">Current Size (max-width: 100vw)</div>
+        <div class="robot-container">
+            <div class="parallax-layer title-image">
+                <div class="title-placeholder">1702E SILVER KNIGHTS</div>
+            </div>
+            <div class="parallax-layer robot-image">
+                <div class="robot-placeholder">
+                    <span style="color: #666;">Robot Image</span>
+                </div>
+            </div>
+        </div>
+        <div class="size-info">
+            <h4>Current Implementation</h4>
+            <p><strong>CSS:</strong> max-width: 100vw<br>
+            <strong>Result:</strong> Fits viewport width<br>
+            <strong>Size:</strong> <span class="current-width">0</span>px</p>
+        </div>
+    </section>
+
+    <!-- Option 1: Bigger Width -->
+    <section class="comparison-section bigger-width">
+        <div class="section-label">Option 1: Bigger Width (width: 120vw)</div>
+        <div class="robot-container">
+            <div class="parallax-layer title-image">
+                <div class="title-placeholder">1702E SILVER KNIGHTS</div>
+            </div>
+            <div class="parallax-layer robot-image">
+                <div class="robot-placeholder">
+                    <span style="color: #666;">Robot Image</span>
+                </div>
+            </div>
+        </div>
+        <div class="size-info">
+            <h4>20% Bigger Than Viewport</h4>
+            <p><strong>CSS:</strong> width: 120vw; max-width: none<br>
+            <strong>Result:</strong> 20% larger than screen<br>
+            <strong>Size:</strong> <span class="bigger-width-size">0</span>px</p>
+        </div>
+    </section>
+
+    <!-- Option 2: Percentage Based -->
+    <section class="comparison-section percentage-bigger">
+        <div class="section-label">Option 2: Larger Percentage (width: 85vw, max: 1000px)</div>
+        <div class="robot-container">
+            <div class="parallax-layer title-image">
+                <div class="title-placeholder">1702E SILVER KNIGHTS</div>
+            </div>
+            <div class="parallax-layer robot-image">
+                <div class="robot-placeholder">
+                    <span style="color: #666;">Robot Image</span>
+                </div>
+            </div>
+        </div>
+        <div class="size-info">
+            <h4>Controlled Larger Size</h4>
+            <p><strong>CSS:</strong> width: 85vw; max-width: 1000px<br>
+            <strong>Result:</strong> Bigger but capped<br>
+            <strong>Size:</strong> <span class="percentage-size">0</span>px</p>
+        </div>
+    </section>
+
+    <!-- Option 3: Clamp Based -->
+    <section class="comparison-section fixed-bigger">
+        <div class="section-label">Option 3: Larger Clamp (clamp(600px, 75vw, 900px))</div>
+        <div class="robot-container">
+            <div class="parallax-layer title-image">
+                <div class="title-placeholder">1702E SILVER KNIGHTS</div>
+            </div>
+            <div class="parallax-layer robot-image">
+                <div class="robot-placeholder">
+                    <span style="color: #666;">Robot Image</span>
+                </div>
+            </div>
+        </div>
+        <div class="size-info">
+            <h4>Smart Scaling Bigger</h4>
+            <p><strong>CSS:</strong> clamp(600px, 75vw, 900px)<br>
+            <strong>Result:</strong> Larger min/max values<br>
+            <strong>Size:</strong> <span class="clamp-size">0</span>px</p>
+        </div>
+    </section>
+
+    <script>
+        function updateSizeInfo() {
+            const vw = window.innerWidth;
+            
+            // Current size (100vw equivalent)
+            document.querySelector('.current-width').textContent = Math.min(vw, 1200);
+            
+            // 120vw size
+            document.querySelector('.bigger-width-size').textContent = Math.round(vw * 1.2);
+            
+            // 85vw with 1000px max
+            document.querySelector('.percentage-size').textContent = Math.min(Math.round(vw * 0.85), 1000);
+            
+            // Clamp calculation
+            const clampSize = Math.max(600, Math.min(Math.round(vw * 0.75), 900));
+            document.querySelector('.clamp-size').textContent = clampSize;
+        }
+        
+        updateSizeInfo();
+        window.addEventListener('resize', updateSizeInfo);
+    </script>
+</body>
+</html>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expanded Container Techniques Comparison</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .demo-section {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 3px solid #eee;
+        }
+
+        .demo-title {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(215, 38, 56, 0.9);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            z-index: 100;
+        }
+
+        /* TECHNIQUE 1: Remove max-width constraint entirely */
+        .full-width-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .full-width-container .title-image {
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            /* Allow title to use full viewport width */
+            width: clamp(320px, 95vw, none);
+            max-width: none;
+            height: auto;
+        }
+
+        /* TECHNIQUE 2: Larger container with overflow management */
+        .expanded-container {
+            width: 120vw;
+            max-width: 1600px;
+            margin-left: -10vw; /* Center the oversized container */
+            height: 100%;
+            position: relative;
+            overflow: visible;
+        }
+
+        .expanded-container .title-image {
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            width: clamp(400px, 85vw, 1200px);
+            height: auto;
+        }
+
+        /* TECHNIQUE 3: Breakout from parent constraints */
+        .breakout-container {
+            width: 100%;
+            max-width: 1200px;
+            height: 100%;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .breakout-container .title-image {
+            position: absolute;
+            top: 20%;
+            /* Break out of parent container */
+            left: 50vw;
+            transform: translateX(-50%);
+            z-index: 10;
+            width: clamp(350px, 90vw, 1000px);
+            height: auto;
+        }
+
+        /* TECHNIQUE 4: Dynamic container with CSS Grid */
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr minmax(320px, 90vw) 1fr;
+            grid-template-rows: 1fr auto 1fr;
+            width: 100vw;
+            height: 100%;
+            position: relative;
+        }
+
+        .grid-container .title-image {
+            grid-column: 2;
+            grid-row: 2;
+            justify-self: center;
+            z-index: 10;
+            width: 100%;
+            height: auto;
+        }
+
+        /* Shared styles for demonstration */
+        .title-placeholder {
+            background: linear-gradient(45deg, #D72638, #ff4757);
+            color: white;
+            padding: 30px 40px;
+            border-radius: 15px;
+            font-weight: 900;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(215, 38, 56, 0.3);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: clamp(1.5rem, 5vw, 3rem);
+        }
+
+        .container-info {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 12px;
+            max-width: 250px;
+        }
+
+        .container-info h4 {
+            color: #4CAF50;
+            margin-bottom: 8px;
+        }
+
+        .size-indicator {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(215, 38, 56, 0.9);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .expanded-container {
+                width: 110vw;
+                margin-left: -5vw;
+            }
+            
+            .full-width-container .title-image,
+            .expanded-container .title-image,
+            .breakout-container .title-image {
+                width: clamp(280px, 98vw, 600px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Technique 1: Full Width Container -->
+    <section class="demo-section">
+        <div class="demo-title">Technique 1: Remove Container Limits</div>
+        <div class="full-width-container">
+            <div class="title-image">
+                <div class="title-placeholder">1702E SILVER KNIGHTS</div>
+            </div>
+        </div>
+        <div class="container-info">
+            <h4>Full Width Approach</h4>
+            <p>• Removes max-width entirely<br>
+            • Uses full viewport width<br>
+            • Simple implementation<br>
+            • May be too large on wide screens</p>
+        </div>
+        <div class="size-indicator">Container: 100vw</div>
+    </section>
+
+    <!-- Technique 2: Expanded Container -->
+    <section class="demo-section">
+        <div class="demo-title">Technique 2: Oversized Container</div>
+        <div class="expanded-container">
+            <div class="title-image">
+                <div class="title-placeholder">1702E SILVER KNIGHTS</div>
+            </div>
+        </div>
+        <div class="container-info">
+            <h4>Expanded Container</h4>
+            <p>• 120vw container width<br>
+            • Centered with negative margin<br>
+            • Controlled overflow<br>
+            • Balanced approach</p>
+        </div>
+        <div class="size-indicator">Container: 120vw (max 1600px)</div>
+    </section>
+
+    <!-- Technique 3: Breakout Positioning -->
+    <section class="demo-section">
+        <div class="demo-title">Technique 3: Viewport Breakout</div>
+        <div class="breakout-container">
+            <div class="title-image">
+                <div class="title-placeholder">1702E SILVER KNIGHTS</div>
+            </div>
+        </div>
+        <div class="container-info">
+            <h4>Breakout Positioning</h4>
+            <p>• Keeps existing container<br>
+            • Title breaks out using viewport<br>
+            • Maintains other elements<br>
+            • Surgical approach</p>
+        </div>
+        <div class="size-indicator">Title: 90vw, Container: 1200px</div>
+    </section>
+
+    <!-- Technique 4: CSS Grid Layout -->
+    <section class="demo-section">
+        <div class="demo-title">Technique 4: CSS Grid Container</div>
+        <div class="grid-container">
+            <div class="title-image">
+                <div class="title-placeholder">1702E SILVER KNIGHTS</div>
+            </div>
+        </div>
+        <div class="container-info">
+            <h4>Grid Layout</h4>
+            <p>• CSS Grid for precise control<br>
+            • Responsive grid columns<br>
+            • Modern layout approach<br>
+            • Excellent browser support</p>
+        </div>
+        <div class="size-indicator">Grid: 90vw center column</div>
+    </section>
+
+    <script>
+        // Dynamic size reporting
+        function updateSizeInfo() {
+            const indicators = document.querySelectorAll('.size-indicator');
+            const vw = window.innerWidth;
+            
+            indicators.forEach(indicator => {
+                const text = indicator.textContent;
+                if (text.includes('100vw')) {
+                    indicator.innerHTML = `Container: 100vw (${vw}px)`;
+                } else if (text.includes('120vw')) {
+                    indicator.innerHTML = `Container: 120vw (${Math.round(vw * 1.2)}px, max 1600px)`;
+                } else if (text.includes('90vw')) {
+                    indicator.innerHTML = `Title: 90vw (${Math.round(vw * 0.9)}px), Container: 1200px`;
+                } else if (text.includes('Grid')) {
+                    indicator.innerHTML = `Grid: 90vw center (${Math.round(vw * 0.9)}px)`;
+                }
+            });
+        }
+        
+        updateSizeInfo();
+        window.addEventListener('resize', updateSizeInfo);
+    </script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+version: "1.0.0"
+generatedBy: "edp-6-mcp"
+timestamp: "2025-09-02T12:00:00Z"
+originalIntent: "do_dis, in the top right corner animate heartface, and in the bottom left corner, add the light bulb"
+scope:
+  allowedPaths:
+    - "index.html"
+  forbiddenPaths:
+    - "public/images/*"
+    - "docs/*"
+    - ".superdesign/*"
+  newFiles: []
+apiContracts:
+  - name: "heartfaceContainer"
+    type: "html-element"
+    params:
+      - name: "id"
+        type: "string"
+        value: "heartfaceContainer"
+    returns: "void"
+    required: true
+  - name: "lightbulbContainer"
+    type: "html-element"
+    params:
+      - name: "id"
+        type: "string"
+        value: "lightbulbContainer"
+    returns: "void"
+    required: true
+  - name: "heartfaceFrame"
+    type: "property"
+    params:
+      - name: "value"
+        type: "number"
+        range: "1-2"
+    returns: "number"
+    required: true
+  - name: "lightbulbFrame"
+    type: "property"
+    params:
+      - name: "value"
+        type: "number"
+        range: "1-2"
+    returns: "number"
+    required: true
+acceptanceCriteria:
+  - id: "AC-001"
+    description: "Heartface animation displays in top-right corner"
+    given: "Page loads with hero banner"
+    when: "Animation system initializes"
+    then: "Heartface appears in top-right corner and alternates between frames"
+  - id: "AC-002"
+    description: "Lightbulb animation displays in bottom-left corner"
+    given: "Page loads with hero banner"
+    when: "Animation system initializes"
+    then: "Lightbulb appears in bottom-left corner and alternates between frames"
+  - id: "AC-003"
+    description: "Animations synchronized with existing elements"
+    given: "All animations are running"
+    when: "Frame changes occur"
+    then: "All elements change frames simultaneously at 1fps timing"
+  - id: "AC-004"
+    description: "Accessibility support maintained"
+    given: "User has reduced motion preferences enabled"
+    when: "Page loads"
+    then: "New animations respect prefers-reduced-motion setting"
+nonGoals:
+  - "Modifying existing animation timing or behavior"
+  - "Changing positions of existing elements"
+  - "Adding new animation features beyond basic frame alternating"
+  - "Performance optimizations or refactoring existing code"
+  - "Creating new image assets"
+complexityBudget:
+  maxNewFunctions: 0
+  maxNewFiles: 0
+  maxLinesOfCode: 50
+  maxDependencies: 0
